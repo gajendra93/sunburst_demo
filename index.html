@@ -10,15 +10,16 @@
     <div id="sequence"></div>
     <div id="chart">
       <div id="explanation">
-        <span id="courseName" style="font-size: 30px; font-weight: bolder;"></span><br/>
+        <span id="courseName" style="font-size: 15px; font-weight: bolder;"></span><br/>
       </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script type="text/javascript">
-		var width = 750;
-		var height = 600;
+		var width = 1000;
+		var height = 450;
+		var n=1;
 		var radius = Math.min(width, height) / 2;
 		var x = d3.scale.linear()
 			   .range([0, 2 * Math.PI]);
@@ -58,7 +59,7 @@
 			  .enter().append("svg:path")
 			  .attr("d", arc)
 			  .attr("fill-rule", "evenodd")
-			  .style("fill", function(d) { return color(d.name); })
+			  .style("fill", function(d) { if(n==1){++n; return '#ddd';} return color(d.name);})
 			  .style("opacity", 1)
 			  .on("click", click)
 			  .on("mouseover", mouseover);
@@ -133,7 +134,7 @@
 		}
 
 		var b = {
-		  w: 120, h: 40, s: 3, t: 10
+		  w: 90, h: 30, s: 3, t: 10
 		};
 
 		function breadcrumbPoints(d, i) {
@@ -161,6 +162,8 @@
 		      .attr("x", (b.w + b.t) / 2)
 		      .attr("y", b.h / 2)
 		      .attr("dy", "0.35em")
+		      .style('text-align', 'justify')
+		      .style('font-size', '9px')
 		      .attr("text-anchor", "middle")
 		      .text(function(d) { return d.name; });
 
